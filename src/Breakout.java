@@ -62,34 +62,7 @@ public class Breakout extends Canvas{
 
         }
     }
-    /*@Override
-    public void paint(Graphics g){
-        if(dbImage == null){
-            dbImage = createImage(width, height);
-            if(dbImage == null){
-                System.out.println("Fortfarande Fel.");
-                return;
-            }else{
-                dbg = dbImage.getGraphics();
-            }
-        }
-        dbg.setColor(Color.DARK_GRAY);
-        dbg.fillRect(0, 0, width, height);
-        draw(dbg);
-        g.drawImage(dbImage, 0, 0, this);
-    }
 
-    private void draw(Graphics g) {
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, width, height);
-
-        drawSlab(g);
-        ball.draw(g);
-
-        for(int i = 0; i<list.length; i++) {
-            list[i].draw(g);
-        }
-    }*/
     private void draw(){
         dbImage = createImage(getWidth(), getHeight());
         dbg = dbImage.getGraphics();
