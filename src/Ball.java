@@ -5,18 +5,20 @@ public class Ball implements Runnable{
     int y = 600;
     Rectangle r;
     Color c;
-    int vx = 10, vy = 5;
+    int vx = 10, vy = 5; //Velocity x and y
 
     public Ball(){
         r = new Rectangle(x, y, 25, 25);
         c = new Color(0x00ffff);
     }
-
+    /**
+     * To make the ball move when game is started.
+     * */
     public void run(){
-        while(true){
+        while(!Breakout.gameOver || Breakout.hitBlocks <40){
             r.x += vx;
             r.y += vy;
-            colission();
+            collision();
             try{
                 Thread.sleep(40);
             }catch (InterruptedException e){
@@ -24,8 +26,10 @@ public class Ball implements Runnable{
             }
         }
     }
-
-    private void colission() {
+    /**
+     * To check if ball collides.
+     * */
+    private void collision() {
         if((r.y+25)>=675 && r.x >= Breakout.x && r.x<=(Breakout.x+200)){
             if(vy>0){
                 vy = -vy;
@@ -46,6 +50,7 @@ public class Ball implements Runnable{
                 if(r.x < (Breakout.list[i].x+130) && r.x+25 > Breakout.list[i].x && Breakout.list[i].exist){
                     Breakout.list[i].exist = false;
                     Breakout.hitBlocks++;
+                    Breakout.points++;
                     Toolkit.getDefaultToolkit().beep();
                     if(r.x >Breakout.list[i].x +5 || r.x <Breakout.list[i].x+125){
                         if(r.y > Breakout.list[i].y+5 && r.y < Breakout.list[i].y+45){
@@ -65,6 +70,7 @@ public class Ball implements Runnable{
             for(int i = 20; i<30; i++) {
                 if(r.x <= (Breakout.list[i].x+130) && r.x+25 >= Breakout.list[i].x && Breakout.list[i].exist){
                     Breakout.list[i].exist = false;
+                    Breakout.points+=2;
                     Breakout.hitBlocks++;
                     Toolkit.getDefaultToolkit().beep();
                     if(r.x >Breakout.list[i].x +5 || r.x <Breakout.list[i].x+125){
@@ -85,6 +91,7 @@ public class Ball implements Runnable{
             for(int i = 10; i<20; i++) {
                 if(r.x <= (Breakout.list[i].x+130) && r.x+25 >= Breakout.list[i].x && Breakout.list[i].exist){
                     Breakout.list[i].exist = false;
+                    Breakout.points+=5;
                     Breakout.hitBlocks++;
                     Toolkit.getDefaultToolkit().beep();
                     if(r.x <Breakout.list[i].x +5 || r.x >Breakout.list[i].x+125){
@@ -105,6 +112,7 @@ public class Ball implements Runnable{
             for(int i = 0; i<10; i++) {
                 if(r.x <= (Breakout.list[i].x+130) && r.x+25 >= Breakout.list[i].x && Breakout.list[i].exist){
                     Breakout.list[i].exist = false;
+                    Breakout.points+=10;
                     Breakout.hitBlocks++;
                     Toolkit.getDefaultToolkit().beep();
                     if(r.x <Breakout.list[i].x +5 || r.x >Breakout.list[i].x+125){
@@ -122,7 +130,9 @@ public class Ball implements Runnable{
             }
         }
     }
-
+    /**
+     * To draw the ball
+     * */
     public void draw(Graphics g){
         g.setColor(c);
         g.fillOval(r.x, r.y, (int)r.getWidth(), (int)r.getHeight());
