@@ -175,8 +175,10 @@ public class Breakout extends Canvas{
 
         }
     }
-
+    /**
+     * Starts Game.
+     * */
     public static void main(String[] args) {
-        Breakout b = new Breakout();
+        new Breakout();
     }
 }
