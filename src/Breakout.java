@@ -135,6 +135,11 @@ public class Breakout extends Canvas{
                     x -= moveSlab;
                 }
             }
+            if(keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                if(gameOver || hitBlocks>=40){
+                    startOver();
+                }
+            }
 
         }
 
@@ -144,6 +149,31 @@ public class Breakout extends Canvas{
 
         }
     }
+
+    private void startOver() {
+        for(int i = 0; i<list.length; i++){//Creating blocks
+            if(i<10){
+                list[i] = new Block((150*i+20), 50, i);
+            }else if(i<20){
+                list[i] = new Block((150*(i-10)+20), 110, i);
+            }else if(i<30){
+                list[i] = new Block((150*(i-20)+20), 170, i);
+            }else if(i<40){
+                list[i] = new Block((150*(i-30)+20), 230, i);
+            }
+
+        }
+
+        x = 660;
+        ball.r.x = 750;
+        ball.r.y = 600;
+        ball.vx = 10;
+        ball.vy = 5;
+        gameOver = false;
+        hitBlocks = 0;
+        points = 0;
+    }
+
     /**
      * Mouselistener for platform movement with mouse.
      * */
